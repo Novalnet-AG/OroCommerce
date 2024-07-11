@@ -44,7 +44,7 @@ class NovalnetResponseListener
     protected $router;
 
     /**
-     * @var Session
+     * @var \Symfony\Component\HttpFoundation\RequestStack
      */
     protected $session;
 
@@ -69,7 +69,7 @@ class NovalnetResponseListener
      * @param PaymentMethodProviderInterface $paymentProvider
      * @param DoctrineHelper $doctrineHelper
      * @param TranslatorInterface $translator
-     * @param Session $session
+     * @param \Symfony\Component\HttpFoundation\RequestStack $session
      * @param NovalnetHelper $novalnetHelper
      * @param RouterInterface $routerInterface
      * @param NovalnetCallback $novalnetCallback
@@ -80,7 +80,7 @@ class NovalnetResponseListener
         PaymentMethodProviderInterface $paymentProvider,
         DoctrineHelper $doctrineHelper,
         TranslatorInterface $translator,
-        Session $session,
+        \Symfony\Component\HttpFoundation\RequestStack $session,
         NovalnetHelper $novalnetHelper,
         RouterInterface $routerInterface,
         NovalnetCallback $novalnetCallback,

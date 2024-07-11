@@ -4,10 +4,10 @@ namespace Novalnet\Bundle\NovalnetBundle\Controller;
 
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Oro\Bundle\SecurityBundle\Annotation\CsrfProtection;
+use Oro\Bundle\SecurityBundle\Attribute\CsrfProtection;
 use Novalnet\Bundle\NovalnetBundle\Entity\NovalnetTransactionDetails;
 use Oro\Bundle\OrderBundle\Entity\Order;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,18 +46,12 @@ use Novalnet\Bundle\NovalnetBundle\PaymentMethod\Provider\NovalnetTrustlyMethodP
  */
 class NovalnetExtensionController extends AbstractController
 {
-    /**
-     * @Route(
-     *       "/show-manage-transaction/{paymentTransactionId}/",
-     *       name="novalnet_transaction_show_manage_transaction"
-     * )
-     * @ParamConverter(
-     *       "paymentTransaction",
-     *        class="OroPaymentBundle:PaymentTransaction",
-     *        options={"id" = "paymentTransactionId"}
-     * )
-     * @Template
-     */
+    public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
+    {
+    }
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/show-manage-transaction/{paymentTransactionId}/', name: 'novalnet_transaction_show_manage_transaction')]
+    #[ParamConverter('paymentTransaction', class: 'OroPaymentBundle:PaymentTransaction', options: ['id' => 'paymentTransactionId'])]
+    #[Template]
     public function showManageTransactionAction(PaymentTransaction $paymentTransaction)
     {
         $transactionDetails = $this->getNovalnetTransactionDetails($paymentTransaction);
@@ -66,18 +60,9 @@ class NovalnetExtensionController extends AbstractController
     }
 
 
-    /**
-     * @Route(
-     *      "/show-refund/{paymentTransactionId}/",
-     *       name="novalnet_transaction_show_refund"
-     * )
-     * @ParamConverter(
-     *      "paymentTransaction",
-     *      class="OroPaymentBundle:PaymentTransaction",
-     *      options={"id" = "paymentTransactionId"}
-     * )
-     * @Template
-     */
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/show-refund/{paymentTransactionId}/', name: 'novalnet_transaction_show_refund')]
+    #[ParamConverter('paymentTransaction', class: 'OroPaymentBundle:PaymentTransaction', options: ['id' => 'paymentTransactionId'])]
+    #[Template]
     public function showRefundAction(PaymentTransaction $paymentTransaction)
     {
         $transactionDetails = $this->getNovalnetTransactionDetails($paymentTransaction);
@@ -86,16 +71,12 @@ class NovalnetExtensionController extends AbstractController
 
 
     /**
-     * @Route(
-     *     "/execute-refund",
-     *      name="novalnet_transaction_execute_refund",
-     *      methods={"POST"}
-     * )
-     * @CsrfProtection()
      *
      * @param Request $request
      * @return JsonResponse
      */
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/execute-refund', name: 'novalnet_transaction_execute_refund', methods: ['POST'])]
+    #[CsrfProtection]
     public function executeRefundAction(Request $request)
     {
 
@@ -129,16 +110,16 @@ class NovalnetExtensionController extends AbstractController
 
 
         if ($response['result']['status_code'] == 100) {
-            $repository = $this->getDoctrine()->getRepository(NovalnetTransactionDetails::class);
+            $repository = $this->managerRegistry->getRepository(NovalnetTransactionDetails::class);
             $nnTransactionDetail = $repository->findOneBy(['tid' => $tid]);
 
-            $orderRepository = $this->getDoctrine()->getRepository(Order::class);
+            $orderRepository = $this->managerRegistry->getRepository(Order::class);
             $orderDetails = $orderRepository->findOneBy(['id' => $nnTransactionDetail->getOrderNo()]);
 
             $novalnetHelper = $this->get(NovalnetHelper::class);
             $doctrineHelper = $this->get(DoctrineHelper::class);
             $translator = $this->get(TranslatorInterface::class);
-            $paymentTransaction = $this->getDoctrine()->getRepository(PaymentTransaction::class)->findOneBy([
+            $paymentTransaction = $this->managerRegistry->getRepository(PaymentTransaction::class)->findOneBy([
                     'id' =>  $paymentTransactionID
             ]);
 
@@ -181,16 +162,12 @@ class NovalnetExtensionController extends AbstractController
     }
 
     /**
-     * @Route(
-     *    "/execute-manage-transaction",
-     *     name="novalnet_transaction_execute_manage_transaction",
-     *     methods={"POST"}
-     * )
-     * @CsrfProtection()
      *
      * @param Request $request
      * @return JsonResponse
      */
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/execute-manage-transaction', name: 'novalnet_transaction_execute_manage_transaction', methods: ['POST'])]
+    #[CsrfProtection]
     public function executeManageTransactionAction(Request $request)
     {
         $tid = $request->get('tid');
@@ -224,7 +201,7 @@ class NovalnetExtensionController extends AbstractController
 
 
         if ($response['result']['status_code'] == 100) {
-            $repository = $this->getDoctrine()->getRepository(NovalnetTransactionDetails::class);
+            $repository = $this->managerRegistry->getRepository(NovalnetTransactionDetails::class);
             $nnTransactionDetail = $repository->findOneBy(['tid' => $tid]);
 
             $novalnetHelper = $this->get(NovalnetHelper::class);
@@ -236,10 +213,10 @@ class NovalnetExtensionController extends AbstractController
             $entityManager->persist($nnTransactionDetail);
             $entityManager->flush();
 
-            $orderRepository = $this->getDoctrine()->getRepository(Order::class);
+            $orderRepository = $this->managerRegistry->getRepository(Order::class);
             $orderDetails = $orderRepository->findOneBy(['id' => $nnTransactionDetail->getOrderNo()]);
 
-            $paymentTransaction = $this->getDoctrine()->getRepository(PaymentTransaction::class)->findOneBy([
+            $paymentTransaction = $this->managerRegistry->getRepository(PaymentTransaction::class)->findOneBy([
                     'id' =>  $paymentTransactionID
             ]);
        
@@ -299,7 +276,7 @@ class NovalnetExtensionController extends AbstractController
 		
         $paymentAccessKey = $paymentMethod->config->getPaymentAccessKey();
 
-        $repository = $this->getDoctrine()->getRepository(NovalnetTransactionDetails::class);
+        $repository = $this->managerRegistry->getRepository(NovalnetTransactionDetails::class);
 
         $qryBuilder = $repository->createQueryBuilder('nn')
             ->select('nn.tid, nn.amount, nn.paymentType, nn.additionalInfo, nn.status')
@@ -320,7 +297,7 @@ class NovalnetExtensionController extends AbstractController
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedServices()
+    public static function getSubscribedServices(): array
     {
 		
         return array_merge(parent::getSubscribedServices(), [

@@ -6,95 +6,95 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Novalnet transaction details Entity
- * @ORM\Table(name="nn_transaction_details")
- * @ORM\Entity
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'nn_transaction_details')]
 class NovalnetTransactionDetails
 {
     /**
      * @var int
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected $id;
 
     /**
      * @var integer
-     * @ORM\Column(name="tid", type="bigint", length=20, nullable=true)
      */
+    #[ORM\Column(name: 'tid', type: 'bigint', length: 20, nullable: true)]
     protected $tid;
 
     /**
      * @var integer
-     * @ORM\Column(name="status", type="string", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'status', type: 'string', length: 30, nullable: true)]
     protected $status;
 
     /**
      * @var boolean
-     * @ORM\Column(name="test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'test_mode', type: 'boolean', options: ['default' => false])]
     protected $testMode;
 
     /**
      * @var integer
-     * @ORM\Column(name="amount", type="integer", length=11, nullable=true)
      */
+    #[ORM\Column(name: 'amount', type: 'integer', length: 11, nullable: true)]
     protected $amount;
 
     /**
      * @var string
-     * @ORM\Column(name="currency", type="string", length=5, nullable=true)
      */
+    #[ORM\Column(name: 'currency', type: 'string', length: 5, nullable: true)]
     protected $currency;
 
     /**
      * @var string
-     * @ORM\Column(name="payment_type", type="string", length=80, nullable=true)
      */
+    #[ORM\Column(name: 'payment_type', type: 'string', length: 80, nullable: true)]
     protected $paymentType;
 
     /**
      * @var string
-     * @ORM\Column(name="customer_no", type="string", length=20, nullable=true)
      */
+    #[ORM\Column(name: 'customer_no', type: 'string', length: 20, nullable: true)]
     protected $customerNo;
 
     /**
      * @var string
-     * @ORM\Column(name="order_no", type="string", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'order_no', type: 'string', length: 30, nullable: true)]
     protected $orderNo;
 
     /**
      * @var string
-     * @ORM\Column(name="token", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'token', type: 'string', length: 255, nullable: true)]
     protected $token;
 
     /**
      * @var string
-     * @ORM\Column(name="payment_data", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'payment_data', type: 'text', nullable: true)]
     protected $paymentData;
 
     /**
      * @var string
-     * @ORM\Column(name="oneclick", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'oneclick', type: 'boolean', options: ['default' => false])]
     protected $oneclick;
 
     /**
      * @var string
-     * @ORM\Column(name="refunded_amount", type="integer", length=11, options={"default"=0})
      */
+    #[ORM\Column(name: 'refunded_amount', type: 'integer', length: 11, options: ['default' => 0])]
     protected $refundedAmount;
 
     /**
      * @var string
-     * @ORM\Column(name="additional_info", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'additional_info', type: 'text', nullable: true)]
     protected $additionalInfo;
 
     /**

@@ -13,7 +13,7 @@ class NovalnetBundle extends Bundle
     /**
      * @return NovalnetExtension
      */
-    public function getContainerExtension()
+    public function getContainerExtension(): ?\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
         if (!$this->extension) {
             $this->extension = new NovalnetExtension();

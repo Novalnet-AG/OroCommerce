@@ -8,983 +8,845 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
  * Entity which store Novalnet integration settings
- * @ORM\Entity(repositoryClass="Novalnet\Bundle\NovalnetBundle\Entity\Repository\NovalnetSettingsRepository")
  */
+#[ORM\Entity(repositoryClass: \Novalnet\Bundle\NovalnetBundle\Entity\Repository\NovalnetSettingsRepository::class)]
 class NovalnetSettings extends Transport
 {
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_public_key", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_public_key', type: 'string', length: 255, nullable: true)]
     private $productActivationKey;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_private_key", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_private_key', type: 'string', length: 255, nullable: true)]
     private $paymentAccessKey;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_client_key", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_client_key', type: 'string', length: 255, nullable: true)]
     private $clientKey;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_tariff", type="integer", length=10, nullable=true)
      */
+    #[ORM\Column(name: 'nn_tariff', type: 'integer', length: 10, nullable: true)]
     private $tariff;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_display_payment_logo", type="boolean", nullable=true)
      */
+    #[ORM\Column(name: 'nn_display_payment_logo', type: 'boolean', nullable: true)]
     private $displayPaymentLogo;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_callback_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_callback_test_mode', type: 'boolean', options: ['default' => false])]
     private $callbackTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_callback_email_to", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_callback_email_to', type: 'string', length: 255, nullable: true)]
     private $callbackEmailTo;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_invoice_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_invoice_test_mode', type: 'boolean', options: ['default' => false])]
     private $invoiceTestMode;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_invoice_duedate", type="integer", length=2, nullable=true)
      */
+    #[ORM\Column(name: 'nn_invoice_duedate', type: 'integer', length: 2, nullable: true)]
     private $invoiceDuedate;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_invoice_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_invoice_notify', type: 'string', length: 255, nullable: true)]
     private $invoiceBuyerNotification;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_invoice_action", type="string", length=15, nullable=true)
      */
+    #[ORM\Column(name: 'nn_invoice_action', type: 'string', length: 15, nullable: true)]
     private $invoicePaymentAction;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_invoice_onhold_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_invoice_onhold_amnt', type: 'integer', length: 30, nullable: true)]
     private $invoiceOnholdAmount;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_instl_inv_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_instl_inv_test_mode', type: 'boolean', options: ['default' => false])]
     private $instalmentInvoiceTestMode;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_instl_inv_onhold_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_inv_onhold_amnt', type: 'integer', length: 30, nullable: true)]
     private $instalmentInvoiceOnholdAmount;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_instl_inv_action", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_inv_action', type: 'string', length: 255, nullable: true)]
     private $instalmentInvoicePaymentAction;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_instl_inv_min_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_inv_min_amnt', type: 'integer', length: 30, nullable: true)]
     private $instalmentInvoiceMinAmount;
 
     /**
      * @var text
-     *
-     * @ORM\Column(name="nn_instl_inv_cycle", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_inv_cycle', type: 'text', nullable: true)]
     private $instalmentInvoiceCycle;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_instl_inv_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_inv_notify', type: 'string', length: 255, nullable: true)]
     private $instalmentInvoiceBuyerNotification;
 
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_instl_sepa_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_instl_sepa_test_mode', type: 'boolean', options: ['default' => false])]
     private $instalmentSepaTestMode;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_instl_sepa_onhold_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_sepa_onhold_amnt', type: 'integer', length: 30, nullable: true)]
     private $instalmentSepaOnholdAmount;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_instl_sepa_action", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_sepa_action', type: 'string', length: 255, nullable: true)]
     private $instalmentSepaPaymentAction;
 
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_instl_sepa_duedate", type="integer", length=2, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_sepa_duedate', type: 'integer', length: 2, nullable: true)]
     private $instalmentSepaDuedate;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_instl_sepa_min_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_sepa_min_amnt', type: 'integer', length: 30, nullable: true)]
     private $instalmentSepaMinAmount;
 
 
     /**
      * @var text
-     *
-     * @ORM\Column(name="nn_instl_sepa_cycle", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_sepa_cycle', type: 'text', nullable: true)]
     private $instalmentSepaCycle;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_instl_sepa_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_sepa_notify', type: 'string', length: 255, nullable: true)]
     private $instalmentSepaBuyerNotification;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_instl_sepa_oneclick", type="boolean", nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_sepa_oneclick', type: 'boolean', nullable: true)]
     private $instalmentSepaOneclick;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_prepayment_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_prepayment_test_mode', type: 'boolean', options: ['default' => false])]
     private $prepaymentTestMode;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_prepayment_duedate", type="integer", length=2, nullable=true)
      */
+    #[ORM\Column(name: 'nn_prepayment_duedate', type: 'integer', length: 2, nullable: true)]
     private $prepaymentDuedate;
 
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_prepayment_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_prepayment_notify', type: 'string', length: 255, nullable: true)]
     private $prepaymentBuyerNotification;
 
      /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_cc_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_cc_test_mode', type: 'boolean', options: ['default' => false])]
     private $creditCardTestMode;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_cc_enforce_3d", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_cc_enforce_3d', type: 'boolean', options: ['default' => false])]
     private $creditCardEnforce3d;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_cc_oneclick", type="boolean", nullable=true)
      */
+    #[ORM\Column(name: 'nn_cc_oneclick', type: 'boolean', nullable: true)]
     private $creditCardOneclick;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_cc_inline_form", type="boolean", nullable=true)
      */
+    #[ORM\Column(name: 'nn_cc_inline_form', type: 'boolean', nullable: true)]
     private $creditCardInlineForm;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_cc_payment_action", type="string", length=10)
      */
+    #[ORM\Column(name: 'nn_cc_payment_action', type: 'string', length: 10)]
     private $creditCardPaymentAction;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_cc_onhold_amount", type="integer", length=30)
      */
+    #[ORM\Column(name: 'nn_cc_onhold_amount', type: 'integer', length: 30)]
     private $creditCardOnholdAmount;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_cc_logo", type="array", nullable=true)
      */
+    #[ORM\Column(name: 'nn_cc_logo', type: 'array', nullable: true)]
     private $creditCardLogo;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_cc_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_cc_notify', type: 'string', length: 255, nullable: true)]
     private $creditCardBuyerNotification;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_cc_input_style", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'nn_cc_input_style', type: 'text', nullable: true)]
     private $creditCardInputStyle;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_cc_label_style", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'nn_cc_label_style', type: 'text', nullable: true)]
     private $creditCardLabelStyle;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_cc_container_style", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_cc_container_style', length: 255, nullable: true)]
     private $creditCardContainerStyle;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_sepa_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_sepa_test_mode', type: 'boolean', options: ['default' => false])]
     private $sepaTestMode;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_sepa_duedate", type="integer", length=2, nullable=true)
      */
+    #[ORM\Column(name: 'nn_sepa_duedate', type: 'integer', length: 2, nullable: true)]
     private $sepaDuedate;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_sepa_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_sepa_notify', type: 'string', length: 255, nullable: true)]
     private $sepaBuyerNotification;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_sepa_action", type="string", length=15, nullable=true)
      */
+    #[ORM\Column(name: 'nn_sepa_action', type: 'string', length: 15, nullable: true)]
     private $sepaPaymentAction;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_sepa_onhold_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_sepa_onhold_amnt', type: 'integer', length: 30, nullable: true)]
     private $sepaOnholdAmount;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_sepa_oneclick", type="boolean", nullable=true)
      */
+    #[ORM\Column(name: 'nn_sepa_oneclick', type: 'boolean', nullable: true)]
     private $sepaOneclick;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_paypal_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_paypal_test_mode', type: 'boolean', options: ['default' => false])]
     private $paypalTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_paypal_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_paypal_notify', type: 'string', length: 255, nullable: true)]
     private $paypalBuyerNotification;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_paypal_action", type="string", length=15, nullable=true)
      */
+    #[ORM\Column(name: 'nn_paypal_action', type: 'string', length: 15, nullable: true)]
     private $paypalPaymentAction;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_paypal_onhold_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_paypal_onhold_amnt', type: 'integer', length: 30, nullable: true)]
     private $paypalOnholdAmount;
 
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_paypal_oneclick", type="boolean", nullable=true)
      */
+    #[ORM\Column(name: 'nn_paypal_oneclick', type: 'boolean', nullable: true)]
     private $paypalOneclick;
 
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_banktransfer_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_banktransfer_test_mode', type: 'boolean', options: ['default' => false])]
     private $banktransferTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_banktransfer_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_banktransfer_notify', type: 'string', length: 255, nullable: true)]
     private $banktransferBuyerNotification;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_ideal_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_ideal_test_mode', type: 'boolean', options: ['default' => false])]
     private $idealTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_ideal_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_ideal_notify', type: 'string', length: 255, nullable: true)]
     private $idealBuyerNotification;
 
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_g_sepa_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_g_sepa_test_mode', type: 'boolean', options: ['default' => false])]
     private $guaranteedSepaTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_g_sepa_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_sepa_notify', type: 'string', length: 255, nullable: true)]
     private $guaranteedSepaBuyerNotification;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_g_sepa_action", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_sepa_action', type: 'string', length: 255, nullable: true)]
     private $guaranteedSepaPaymentAction;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_g_sepa_onhold_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_sepa_onhold_amnt', type: 'integer', length: 30, nullable: true)]
     private $guaranteedSepaOnholdAmount;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_g_sepa_duedate", type="integer", length=2, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_sepa_duedate', type: 'integer', length: 2, nullable: true)]
     private $guaranteedSepaDuedate;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_g_sepa_min_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_sepa_min_amnt', type: 'integer', length: 30, nullable: true)]
     private $guaranteedSepaMinAmount;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_g_sepa_oneclick", type="boolean", nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_sepa_oneclick', type: 'boolean', nullable: true)]
     private $guaranteedSepaOneclick;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_g_invoice_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_g_invoice_test_mode', type: 'boolean', options: ['default' => false])]
     private $guaranteedInvoiceTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_g_invoice_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_invoice_notify', type: 'string', length: 255, nullable: true)]
     private $guaranteedInvoiceBuyerNotification;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_g_invoice_action", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_invoice_action', type: 'string', length: 255, nullable: true)]
     private $guaranteedInvoicePaymentAction;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_g_invoice_onhold_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_invoice_onhold_amnt', type: 'integer', length: 30, nullable: true)]
     private $guaranteedInvoiceOnholdAmount;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_g_invoice_min_amnt", type="integer", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_invoice_min_amnt', type: 'integer', length: 30, nullable: true)]
     private $guaranteedInvoiceMinAmount;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_eps_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_eps_test_mode', type: 'boolean', options: ['default' => false])]
     private $epsTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_eps_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_eps_notify', type: 'string', length: 255, nullable: true)]
     private $epsBuyerNotification;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_giropay_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_giropay_test_mode', type: 'boolean', options: ['default' => false])]
     private $giropayTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_giropay_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_giropay_notify', type: 'string', length: 255, nullable: true)]
     private $giropayBuyerNotification;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_przelewy_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_przelewy_test_mode', type: 'boolean', options: ['default' => false])]
     private $przelewyTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_przelewy_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_przelewy_notify', type: 'string', length: 255, nullable: true)]
     private $przelewyBuyerNotification;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_postfinance_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_postfinance_test_mode', type: 'boolean', options: ['default' => false])]
     private $postfinanceTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_postfinance_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_postfinance_notify', type: 'string', length: 255, nullable: true)]
     private $postfinanceBuyerNotification;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_postfinancecard_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_postfinancecard_test_mode', type: 'boolean', options: ['default' => false])]
     private $postfinanceCardTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_postfinancecard_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_postfinancecard_notify', type: 'string', length: 255, nullable: true)]
     private $postfinanceCardBuyerNotification;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_multibanco_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_multibanco_test_mode', type: 'boolean', options: ['default' => false])]
     private $multibancoTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_multibanco_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_multibanco_notify', type: 'string', length: 255, nullable: true)]
     private $multibancoBuyerNotification;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_bancontact_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_bancontact_test_mode', type: 'boolean', options: ['default' => false])]
     private $bancontactTestMode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_bancontact_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_bancontact_notify', type: 'string', length: 255, nullable: true)]
     private $bancontactBuyerNotification;
 
     /**
      * @var boolean
-     *
-     * @ORM\Column(name="nn_cashpayment_test_mode", type="boolean", options={"default"=false})
      */
+    #[ORM\Column(name: 'nn_cashpayment_test_mode', type: 'boolean', options: ['default' => false])]
     private $cashpaymentTestMode;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="nn_cashpayment_duedate", type="integer", length=2, nullable=true)
      */
+    #[ORM\Column(name: 'nn_cashpayment_duedate', type: 'integer', length: 2, nullable: true)]
     private $cashpaymentDuedate;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_cashpayment_notify", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'nn_cashpayment_notify', type: 'string', length: 255, nullable: true)]
     private $cashpaymentBuyerNotification;
     
     /**
-	 * @var boolean
-	 *
-	 * @ORM\Column(name="nn_alipay_test_mode", type="boolean", options={"default"=false})
-	 */
-	private $alipayTestMode;
+  * @var boolean
+  */
+ #[ORM\Column(name: 'nn_alipay_test_mode', type: 'boolean', options: ['default' => false])]
+ private $alipayTestMode;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="nn_alipay_notify", type="string", length=255, nullable=true)
-	 */
-	private $alipayBuyerNotification;
+  * @var string
+  */
+ #[ORM\Column(name: 'nn_alipay_notify', type: 'string', length: 255, nullable: true)]
+ private $alipayBuyerNotification;
 
 	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(name="nn_wechatpay_test_mode", type="boolean", options={"default"=false})
-	 */
-	private $wechatpayTestMode;
+  * @var boolean
+  */
+ #[ORM\Column(name: 'nn_wechatpay_test_mode', type: 'boolean', options: ['default' => false])]
+ private $wechatpayTestMode;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="nn_wechatpay_notify", type="string", length=255, nullable=true)
-	 */
-	private $wechatpayBuyerNotification;
+  * @var string
+  */
+ #[ORM\Column(name: 'nn_wechatpay_notify', type: 'string', length: 255, nullable: true)]
+ private $wechatpayBuyerNotification;
 
 	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(name="nn_trustly_test_mode", type="boolean", options={"default"=false})
-	 */
-	private $trustlyTestMode;
+  * @var boolean
+  */
+ #[ORM\Column(name: 'nn_trustly_test_mode', type: 'boolean', options: ['default' => false])]
+ private $trustlyTestMode;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="nn_trustly_notify", type="string", length=255, nullable=true)
-	 */
-	private $trustlyBuyerNotification;
+  * @var string
+  */
+ #[ORM\Column(name: 'nn_trustly_notify', type: 'string', length: 255, nullable: true)]
+ private $trustlyBuyerNotification;
 
 	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(name="nn_ob_transfer_test_mode", type="boolean", options={"default"=false})
-	 */
-	private $onlinebanktransferTestMode;
+  * @var boolean
+  */
+ #[ORM\Column(name: 'nn_ob_transfer_test_mode', type: 'boolean', options: ['default' => false])]
+ private $onlinebanktransferTestMode;
 
 	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="nn_ob_transfer_notify", type="string", length=255, nullable=true)
-	 */
-	private $onlinebanktransferBuyerNotification;
+  * @var string
+  */
+ #[ORM\Column(name: 'nn_ob_transfer_notify', type: 'string', length: 255, nullable: true)]
+ private $onlinebanktransferBuyerNotification;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_credit_card_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_credit_card_lbl', type: 'string', length: 50, nullable: true)]
     private $creditCardLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_credit_card_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_credit_card_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $creditCardShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_sepa_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_sepa_lbl', type: 'string', length: 50, nullable: true)]
     private $sepaLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_sepa_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_sepa_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $sepaShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_invoice_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_invoice_lbl', type: 'string', length: 50, nullable: true)]
     private $invoiceLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_invoice_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_invoice_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $invoiceShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_instl_invoice_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_invoice_lbl', type: 'string', length: 50, nullable: true)]
     private $instalmentInvoiceLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_instl_invoice_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_invoice_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $instalmentInvoiceShortLabel;
 
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_instl_sepa_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_sepa_lbl', type: 'string', length: 50, nullable: true)]
     private $instalmentSepaLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_instl_sepa_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_instl_sepa_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $instalmentSepaShortLabel;
 
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_prepayment_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_prepayment_lbl', type: 'string', length: 50, nullable: true)]
     private $prepaymentLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_prepayment_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_prepayment_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $prepaymentShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_cashpayment_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_cashpayment_lbl', type: 'string', length: 50, nullable: true)]
     private $cashpaymentLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_cashpayment_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_cashpayment_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $cashpaymentShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_paypal_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_paypal_lbl', type: 'string', length: 50, nullable: true)]
     private $paypalLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_paypal_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_paypal_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $paypalShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_banktransfer_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_banktransfer_lbl', type: 'string', length: 50, nullable: true)]
     private $banktransferLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_banktransfer_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_banktransfer_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $banktransferShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_ideal_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_ideal_lbl', type: 'string', length: 50, nullable: true)]
     private $idealLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_ideal_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_ideal_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $idealShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_g_sepa_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_sepa_lbl', type: 'string', length: 50, nullable: true)]
     private $guaranteedSepaLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_g_sepa_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_sepa_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $guaranteedSepaShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_g_invoice_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_invoice_lbl', type: 'string', length: 50, nullable: true)]
     private $guaranteedInvoiceLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_g_invoice_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_g_invoice_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $guaranteedInvoiceShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_eps_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_eps_lbl', type: 'string', length: 50, nullable: true)]
     private $epsLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_eps_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_eps_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $epsShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_giropay_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_giropay_lbl', type: 'string', length: 50, nullable: true)]
     private $giropayLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_giropay_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_giropay_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $giropayShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_przelewy_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_przelewy_lbl', type: 'string', length: 50, nullable: true)]
     private $przelewyLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_przelewy_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_przelewy_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $przelewyShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_postfinance_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_postfinance_lbl', type: 'string', length: 50, nullable: true)]
     private $postfinanceLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_postfinance_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_postfinance_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $postfinanceShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_postfinance_card_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_postfinance_card_lbl', type: 'string', length: 50, nullable: true)]
     private $postfinanceCardLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_postfinance_card_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_postfinance_card_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $postfinanceCardShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_bancontact_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_bancontact_lbl', type: 'string', length: 50, nullable: true)]
     private $bancontactLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_bancontact_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_bancontact_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $bancontactShortLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_multibanco_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_multibanco_lbl', type: 'string', length: 50, nullable: true)]
     private $multibancoLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_multibanco_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_multibanco_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $multibancoShortLabel;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_alipay_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_alipay_lbl', type: 'string', length: 50, nullable: true)]
     private $alipayLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_alipay_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_alipay_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $alipayShortLabel;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_wechatpay_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_wechatpay_lbl', type: 'string', length: 50, nullable: true)]
     private $wechatpayLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_wechatpay_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_wechatpay_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $wechatpayShortLabel;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_trustly_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_trustly_lbl', type: 'string', length: 50, nullable: true)]
     private $trustlyLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_trustly_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_trustly_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $trustlyShortLabel;
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_onlinebanktransfer_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_onlinebanktransfer_lbl', type: 'string', length: 50, nullable: true)]
     private $onlinebanktransferLabel;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="nn_onlinebanktransfer_sh_lbl", type="string", length=50, nullable=true)
      */
+    #[ORM\Column(name: 'nn_onlinebanktransfer_sh_lbl', type: 'string', length: 50, nullable: true)]
     private $onlinebanktransferShortLabel;
 
     /**

@@ -2,11 +2,11 @@
 
 namespace Novalnet\Bundle\NovalnetBundle\Controller;
 
-use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use Oro\Bundle\SecurityBundle\Annotation\CsrfProtection;
+use Oro\Bundle\SecurityBundle\Attribute\AclAncestor;
+use Oro\Bundle\SecurityBundle\Attribute\CsrfProtection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Novalnet\Bundle\NovalnetBundle\Client\Gateway;
 /**
@@ -15,18 +15,14 @@ use Novalnet\Bundle\NovalnetBundle\Client\Gateway;
 class NovalnetSettingsController extends AbstractController
 {
     /**
-     * @Route(
-     *      "/get-merchant-details",
-     *      name="novalnet_settings_get_merchant_data",
-     *      methods={"POST"}
-     * )
      *
-     * @AclAncestor("novalnet_settings_edit")
-     * @CsrfProtection()
      *
      * @param Request $request
      * @return JsonResponse
      */
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/get-merchant-details', name: 'novalnet_settings_get_merchant_data', methods: ['POST'])]
+    #[AclAncestor('novalnet_settings_edit')]
+    #[CsrfProtection]
     public function getMerchantDetailsAction(Request $request)
     {
         $paymentAccessKey = $request->get('privateKey');
@@ -45,7 +41,7 @@ class NovalnetSettingsController extends AbstractController
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedServices()
+    public static function getSubscribedServices(): array
     {
         return array_merge(parent::getSubscribedServices(), [
             Gateway::class

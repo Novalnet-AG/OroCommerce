@@ -6,59 +6,59 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Novalnet callback script history Entity
- * @ORM\Table(name="nn_callback_history")
- * @ORM\Entity
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'nn_callback_history')]
 class NovalnetCallbackHistory
 {
     /**
      * @var int
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected $id;
 
     /**
      * @var int
-     * @ORM\Column(name="date", type="datetime", nullable=true)
      */
+    #[ORM\Column(name: 'date', type: 'datetime', nullable: true)]
     protected $date;
 
     /**
      * @var string
-     * @ORM\Column(name="callback_amount", type="integer", length=11, nullable=true)
      */
+    #[ORM\Column(name: 'callback_amount', type: 'integer', length: 11, nullable: true)]
     protected $callbackAmount;
 
     /**
      * @var string
-     * @ORM\Column(name="order_no", type="string", length=30, nullable=true)
      */
+    #[ORM\Column(name: 'order_no', type: 'string', length: 30, nullable: true)]
     protected $orderNo;
 
     /**
      * @var int
-     * @ORM\Column(name="org_tid", type="bigint", length=20, nullable=true)
      */
+    #[ORM\Column(name: 'org_tid', type: 'bigint', length: 20, nullable: true)]
     protected $orgTid;
 
     /**
      * @var int
-     * @ORM\Column(name="callback_tid", type="bigint", length=20, nullable=true)
      */
+    #[ORM\Column(name: 'callback_tid', type: 'bigint', length: 20, nullable: true)]
     protected $callbackTid;
 
     /**
      * @var string
-     * @ORM\Column(name="payment_type", type="string", length=64, nullable=true)
      */
+    #[ORM\Column(name: 'payment_type', type: 'string', length: 64, nullable: true)]
     protected $paymentType;
 
     /**
      * @var string
-     * @ORM\Column(name="event_type", type="string", length=64, nullable=true)
      */
+    #[ORM\Column(name: 'event_type', type: 'string', length: 64, nullable: true)]
     protected $eventType;
 
     /**
